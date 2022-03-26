@@ -1,6 +1,12 @@
 # Load balancing exercises
 
-## Running app
+## Running all instances
+
+```bash
+docker compose up
+```
+
+## Build and run single app instance
 
 1. Build docker image.
 

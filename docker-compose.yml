@@ -1,0 +1,9 @@
+services:
+  server-1:
+    build: app
+    ports:
+      - "8080:5000"
+  server-2:
+    build: app
+    ports:
+      - "8081:5000"
