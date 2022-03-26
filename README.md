@@ -17,7 +17,7 @@ docker build -t flask-app ./app
 2. Run docker container.
 
 ```bash
-docker run -p 8080:5000 flask-app```
+docker run -p 8080:5000 flask-app
 ```
 
 3. Call your app from a browser or http client.
