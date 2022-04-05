@@ -3,7 +3,7 @@
 ## Running all instances
 
 ```bash
-docker compose up
+docker compose build && docker compose up
 ```
 
 ## Build and run single app instance
