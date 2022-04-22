@@ -1,7 +1,8 @@
 import random
 import string
 import time
-from flask import Flask
+from datetime import datetime
+from flask import Flask, request, jsonify
 from logging.config import dictConfig
 
 dictConfig({
@@ -29,10 +30,21 @@ def generate_request_id():
     return ''.join(random.choice(available_chars) for _ in range(length))
 
 
-@app.route("/")
-def hello_world():
+@app.route("/job", methods=["POST"])
+def create_job():
     request_id = generate_request_id()
     app.logger.info("[%s] Got request", request_id)
-    time.sleep(1)  # doing some job!
+    time.sleep(2)  # doing some job!
     app.logger.info("[%s] Serving response", request_id)
-    return request_id
+    return {
+        "request_id": request_id,
+        "job_data": request.get_json()
+    }
+
+
+@app.route("/status", methods=["GET"])
+def post_job():
+    return {
+        "status": "OK",
+        "current_time": datetime.now().isoformat()
+    }

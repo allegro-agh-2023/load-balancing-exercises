@@ -1,0 +1,10 @@
+###
+GET localhost:8082/status
+
+###
+POST localhost:8082/job
+Content-Type: application/json
+
+{
+  "some_data": true
+}
