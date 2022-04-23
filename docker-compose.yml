@@ -1,13 +1,16 @@
 services:
   server-1:
+    container_name: app-instance-1
     build: app
     ports:
       - "8080:5000"
   server-2:
+    container_name: app-instance-2
     build: app
     ports:
       - "8081:5000"
   loadbalancer:
+    container_name: load-balancer
     build: loadbalancer
     ports:
       - "8082:5000"

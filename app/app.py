@@ -2,7 +2,7 @@ import random
 import string
 import time
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from logging.config import dictConfig
 
 dictConfig({
@@ -16,7 +16,7 @@ dictConfig({
         'formatter': 'default'
     }},
     'root': {
-        'level': 'INFO',
+        'level': 'DEBUG',
         'handlers': ['wsgi']
     }
 })
@@ -30,12 +30,20 @@ def generate_request_id():
     return ''.join(random.choice(available_chars) for _ in range(length))
 
 
+@app.before_request
+def log_request_info():
+    app.logger.debug('Request logging:\n'
+                     f'{request.method} {request.path}\n'
+                     f'{request.headers}'
+                     f'{request.get_data()}')
+
+
 @app.route("/job", methods=["POST"])
 def create_job():
     request_id = generate_request_id()
-    app.logger.info("[%s] Got request", request_id)
+    app.logger.info("[%s] Job started", request_id)
     time.sleep(2)  # doing some job!
-    app.logger.info("[%s] Serving response", request_id)
+    app.logger.info("[%s] Job finished", request_id)
     return {
         "request_id": request_id,
         "job_data": request.get_json()
