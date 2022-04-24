@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request
+from flask import Flask, request, Response
 from logging.config import dictConfig
 
 dictConfig({
@@ -29,9 +29,28 @@ def log_request_info():
                               f'{request.get_data()}')
 
 
-@loadbalancer.route('/', defaults={'u_path': ''})
-@loadbalancer.route("/<path:u_path>")
+@loadbalancer.after_request
+def log_response_info(response):
+    loadbalancer.logger.debug('Response logging:\n'
+                              f'{response.status}\n'
+                              f'{response.headers}'
+                              f'{response.get_data()}\n')
+    return response
+
+
+ALL_HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH']
+
+
+@loadbalancer.route('/', defaults={'u_path': ''}, methods=ALL_HTTP_METHODS)
+@loadbalancer.route("/<path:u_path>", methods=ALL_HTTP_METHODS)
 def balance_load(u_path):
-    # TODO
-    loadbalancer.logger.info(f"Proxying path: '{u_path}'")
-    return requests.get(f'http://app-instance-1:5000/{u_path}').text
+    instance_url = 'http://app-instance-1:5000'
+
+    proxy_response = requests.request(method=request.method,
+                                      url=f'{instance_url}/{u_path}',
+                                      headers=request.headers,
+                                      data=request.get_data())
+
+    return Response(response=proxy_response.text,
+                    status=proxy_response.status_code,
+                    headers=proxy_response.headers.items())
