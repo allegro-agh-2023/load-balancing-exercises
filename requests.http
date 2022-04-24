@@ -1,8 +1,8 @@
 ###
-GET localhost:8082/status
+GET localhost:8083/status
 
 ###
-POST localhost:8082/job
+POST localhost:8083/job
 Content-Type: application/json
 
 {
