@@ -25,3 +25,10 @@ docker run -p 8080:5000 flask-app
 ```http request
 GET localhost:8080
 ```
+
+
+## TODO
+
+- java loadbalancer template
+- instances with different sleep times (POST /job endpoint)
+- benchmark
