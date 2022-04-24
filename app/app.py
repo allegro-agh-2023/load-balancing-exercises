@@ -35,7 +35,16 @@ def log_request_info():
     app.logger.debug('Request logging:\n'
                      f'{request.method} {request.path}\n'
                      f'{request.headers}'
-                     f'{request.get_data()}')
+                     f'{request.get_data()}\n')
+
+
+@app.after_request
+def log_response_info(response):
+    app.logger.debug('Response logging:\n'
+                     f'{response.status}\n'
+                     f'{response.headers}'
+                     f'{response.get_data()}\n')
+    return response
 
 
 @app.route("/job", methods=["POST"])
