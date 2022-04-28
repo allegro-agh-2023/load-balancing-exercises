@@ -5,9 +5,9 @@ services:
   server-2:
     container_name: app-instance-2
     build: app
-  loadbalancer:
-    container_name: load-balancer
-    build: loadbalancer
+  loadbalancer_python:
+    container_name: load-balancer-python
+    build: loadbalancer_python
     ports:
       - "8080:5000"
   loadbalancer_java:
