@@ -10,10 +10,15 @@ services:
     build: loadbalancer
     ports:
       - "8080:5000"
+  loadbalancer_java:
+    container_name: load-balancer-java
+    build: loadbalancer_java
+    ports:
+      - "8081:5000"
   nginx:
     container_name: nginx
     image: nginx:1.21.6
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - "8081:80"
+      - "8082:80"
