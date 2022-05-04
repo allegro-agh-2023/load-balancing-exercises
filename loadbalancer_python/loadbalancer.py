@@ -46,6 +46,10 @@ ALL_HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS'
 def balance_load(u_path):
     instance_url = 'http://app-instance-1:5000'
 
+    ####
+    # TODO: Start your implementation here
+    # ###
+
     proxy_response = requests.request(method=request.method,
                                       url=f'{instance_url}/{u_path}',
                                       headers=request.headers,
