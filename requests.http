@@ -24,3 +24,9 @@ Content-Type: application/json
 {
   "some_data": true
 }
+
+
+### Benchmark ###
+
+###
+GET localhost:8082/benchmark
