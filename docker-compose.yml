@@ -14,7 +14,7 @@ services:
     container_name: load-balancer-java
     build: loadbalancer_java
     ports:
-      - "8081:5000"
+      - "8081:8080"
   nginx:
     container_name: nginx
     image: nginx:1.21.6
