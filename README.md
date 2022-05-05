@@ -1,34 +1,15 @@
 # Load balancing exercises
 
-## Running all instances
+## Build and run
 
 ```bash
 docker compose build && docker compose up
 ```
 
-## Build and run single app instance
+## Remove, rebuild and run containers
 
-1. Build docker image.
-
-```bash
-docker build -t flask-app ./app
-```
-
-2. Run docker container.
+If you make some changes in code use this command.
 
 ```bash
-docker run -p 8080:5000 flask-app
+docker compose down && docker compose build && docker compose up
 ```
-
-3. Call your app from a browser or http client.
-
-```http request
-GET localhost:8080
-```
-
-
-## TODO
-
-- java loadbalancer template
-- instances with different sleep times (POST /job endpoint)
-- benchmark
