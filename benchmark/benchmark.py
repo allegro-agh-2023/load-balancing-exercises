@@ -1,5 +1,5 @@
 import requests
-import threading
+from multiprocessing.pool import ThreadPool
 import time
 from flask import Flask
 from functools import partial
@@ -62,10 +62,10 @@ def benchmark_load_balancer(load_balancer):
 
 
 def benchmark_function(benchmark_subject, threads=2):
+    pool = ThreadPool(threads)
     start = time.time()
-    threads = [threading.Thread(target=benchmark_subject) for x in range(threads)]
-    [thread.start() for thread in threads]
-    [thread.join() for thread in threads]
+    results_async = [pool.apply_async(benchmark_subject) for _ in range(threads)]
+    [result_async.wait() for result_async in results_async]
     end = time.time()
     time_elapsed = end - start
     return time_elapsed
