@@ -24,12 +24,12 @@ public class LoadbalancerEndpoint {
     @RequestMapping(value = "/**")
     public ResponseEntity<String> balanceLoad(HttpMethod httpMethod, @RequestBody(required = false) String requestBody,
                                               @RequestHeader MultiValueMap<String, String> headers, HttpServletRequest request) {
-        String instanceUrl = "http://app-instance-1:5000";
-
+        String firstInstanceUrl = "http://app-instance-1:5000";
+        String secondInstanceUrl = "http://app-instance-1:5000";
         /*
         * TODO: Start your implementation here
         * */
 
-        return restTemplate.exchange(instanceUrl + request.getRequestURI(), httpMethod, new HttpEntity<>(requestBody, headers), String.class);
+        return restTemplate.exchange(firstInstanceUrl + request.getRequestURI(), httpMethod, new HttpEntity<>(requestBody, headers), String.class);
     }
 }

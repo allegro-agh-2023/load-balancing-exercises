@@ -44,14 +44,15 @@ ALL_HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS'
 @loadbalancer.route('/', defaults={'u_path': ''}, methods=ALL_HTTP_METHODS)
 @loadbalancer.route("/<path:u_path>", methods=ALL_HTTP_METHODS)
 def balance_load(u_path):
-    instance_url = 'http://app-instance-1:5000'
+    first_instance_url = 'http://app-instance-1:5000'
+    second_instance_url = 'http://app-instance-1:5000'
 
     ####
     # TODO: Start your implementation here
     # ###
 
     proxy_response = requests.request(method=request.method,
-                                      url=f'{instance_url}/{u_path}',
+                                      url=f'{first_instance_url}/{u_path}',
                                       headers=request.headers,
                                       data=request.get_data())
 
