@@ -25,7 +25,7 @@ public class LoadbalancerEndpoint {
     public ResponseEntity<String> balanceLoad(HttpMethod httpMethod, @RequestBody(required = false) String requestBody,
                                               @RequestHeader MultiValueMap<String, String> headers, HttpServletRequest request) {
         String firstInstanceUrl = "http://app-instance-1:5000";
-        String secondInstanceUrl = "http://app-instance-1:5000";
+        String secondInstanceUrl = "http://app-instance-2:5000";
         /*
         * TODO: Start your implementation here
         * */

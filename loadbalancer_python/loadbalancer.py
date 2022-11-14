@@ -45,7 +45,7 @@ ALL_HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS'
 @loadbalancer.route("/<path:u_path>", methods=ALL_HTTP_METHODS)
 def balance_load(u_path):
     first_instance_url = 'http://app-instance-1:5000'
-    second_instance_url = 'http://app-instance-1:5000'
+    second_instance_url = 'http://app-instance-2:5000'
 
     ####
     # TODO: Start your implementation here
