@@ -45,34 +45,36 @@ def run_benchmark():
 
 def benchmark_results_for(load_balancer_name, load_balancer_url):
     expected_time = 2.5
-    time_elapsed = benchmark_load_balancer(load_balancer_url)
+    time_elapsed, responses_successful = benchmark_load_balancer(load_balancer_url)
 
     return {
         "load_balancer": load_balancer_name,
         "measured_time": time_elapsed,
         "expected_time": expected_time,
-        "result": "SUCCESS" if time_elapsed < expected_time else "FAIL"
+        "errors_in_responses": not responses_successful,
+        "result": "SUCCESS" if time_elapsed < expected_time and responses_successful else "FAIL"
     }
 
 
 def benchmark_load_balancer(load_balancer):
     benchmark_subject = partial(execute_benchmarked_endpoint, load_balancer)
-    time_elapsed = benchmark_function(benchmark_subject)
-    return time_elapsed
+    time_elapsed, responses_successful = benchmark_function(benchmark_subject)
+    return time_elapsed, responses_successful
 
 
 def benchmark_function(benchmark_subject, threads=2):
     pool = ThreadPool(threads)
     start = time.time()
     results_async = [pool.apply_async(benchmark_subject) for _ in range(threads)]
-    [result_async.wait() for result_async in results_async]
+    results = [result_async.get() for result_async in results_async]
     end = time.time()
     time_elapsed = end - start
-    return time_elapsed
+    return time_elapsed, all(results)
 
 
 def execute_benchmarked_endpoint(load_balancer):
-    requests.post(url=f'{load_balancer}/job',
-                  json={
-                      "some_data": "benchmarking"
-                  })
+    response = requests.post(url=f'{load_balancer}/job',
+                             json={
+                                 "some_data": "benchmarking"
+                             })
+    return response.status_code == 200
