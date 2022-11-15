@@ -49,6 +49,10 @@ def balance_load(u_path):
 
     ####
     # TODO: Start your implementation here
+    #
+    # Currently, all requests are forwarded to app-instance-1. Try to implement round-robin!
+    # Every second request should be routed to app-instance-2.
+    # You can test your load balancer with benchmark on GET http://localhost:8082/benchmark
     # ###
 
     proxy_response = requests.request(method=request.method,

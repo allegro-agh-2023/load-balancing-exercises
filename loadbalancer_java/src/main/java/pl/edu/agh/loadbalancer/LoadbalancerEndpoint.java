@@ -26,8 +26,14 @@ public class LoadbalancerEndpoint {
                                               @RequestHeader MultiValueMap<String, String> headers, HttpServletRequest request) {
         String firstInstanceUrl = "http://app-instance-1:5000";
         String secondInstanceUrl = "http://app-instance-2:5000";
+
         /*
         * TODO: Start your implementation here
+        *
+        * Currently, all requests are forwarded to app-instance-1. Try to implement round-robin!
+        * Every second request should be routed to app-instance-2.
+        * You can test your load balancer with benchmark on GET http://localhost:8082/benchmark
+        *
         * */
 
         return restTemplate.exchange(firstInstanceUrl + request.getRequestURI(), httpMethod, new HttpEntity<>(requestBody, headers), String.class);
