@@ -3,7 +3,7 @@
 ## Build and run
 
 ```bash
-docker compose build && docker compose up
+docker-compose build && docker-compose up
 ```
 
 ## Remove, rebuild and run containers
@@ -11,5 +11,5 @@ docker compose build && docker compose up
 If you make some changes in code use this command.
 
 ```bash
-docker compose down && docker compose build && docker compose up
+docker-compose down && docker-compose build && docker-compose up
 ```
