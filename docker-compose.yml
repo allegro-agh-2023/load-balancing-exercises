@@ -1,12 +1,12 @@
 services:
   server-1:
     container_name: app-instance-1
-    build: app
+    build: app_java
     ports:
       - "5001:5000"
   server-2:
     container_name: app-instance-2
-    build: app
+    build: app_java
     ports:
       - "5002:5000"
   loadbalancer_python:
