@@ -31,7 +31,7 @@ def run_benchmark():
     load_balancers = [
         ('java', 'http://load-balancer-java:8080'),
         ('python', 'http://load-balancer-python:5000'),
-        ('nginx', 'http://nginx:80'),
+        ('nginx', 'http://load-balancer-nginx:80'),
     ]
 
     results = [benchmark_results_for(load_balancer_name, load_balancer_url) for (load_balancer_name, load_balancer_url)

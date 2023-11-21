@@ -1,22 +1,22 @@
 services:
   server-1:
     container_name: app-instance-1
-    build: app_java
+    build: app/java
     ports:
       - "5001:5000"
   server-2:
     container_name: app-instance-2
-    build: app_java
+    build: app/java
     ports:
       - "5002:5000"
   loadbalancer_python:
     container_name: load-balancer-python
-    build: loadbalancer_python
+    build: loadbalancer/python
     ports:
       - "8080:5000"
   loadbalancer_java:
     container_name: load-balancer-java
-    build: loadbalancer_java
+    build: loadbalancer/java
     ports:
       - "8081:8080"
   benchmark:
@@ -24,10 +24,10 @@ services:
     build: benchmark
     ports:
       - "8082:5000"
-  nginx:
-    container_name: nginx
+  loadbalancer_nginx:
+    container_name: load-balancer-nginx
     image: nginx:1.21.6
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./loadbalancer/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "8083:80"
