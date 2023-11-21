@@ -26,6 +26,11 @@ public class LoadbalancerEndpoint {
                                               @RequestHeader MultiValueMap<String, String> headers, HttpServletRequest request) {
         String firstInstanceUrl = "http://app-instance-1:5000";
         String secondInstanceUrl = "http://app-instance-2:5000";
+        /*
+        * If you do not use Docker, URLs look like these:
+        * String firstInstanceUrl = "http://localhost:5001";
+        * String secondInstanceUrl = "http://localhost:5002";
+        * */
 
         /*
         * TODO: Start your implementation here
