@@ -22,17 +22,17 @@ Daj nam feedback i pomóż nam ulepszyć zajęcia, uzupełniając tę ankietę: 
 
 <img src="img/1.webp" alt=""/>
 
-Nasza aplikacja staje się popularna. Serwer dostaje coraz więcej ruchu i zużycie procesora rośnie.
-Analitycy przewidują, że liczba użytkowników naszej aplikacji podwoi się w najbliższym czasie.
-Musimy wdrożyć nową wersję aplikacji, w której dodajemy krytyczną funkcjonalność.
-Inwestorzy naciskają, aby nie było żadnych przerw technicznych w działaniu aplikacji.
+- Nasza aplikacja staje się popularna. Serwer dostaje coraz więcej ruchu i zużycie procesora rośnie.
+- Analitycy przewidują, że liczba użytkowników naszej aplikacji podwoi się w najbliższym czasie.
+- Musimy wdrożyć nową wersję aplikacji, w której dodajemy krytyczną funkcjonalność. Inwestorzy jednak naciskają, aby nie
+  było żadnych przerw technicznych w działaniu aplikacji.
 
 #### Komplikacja
 
 <img src="img/2.webp" alt=""/>
 
 Gdy liczba użytkowników wzrośnie, nie będziemy w stanie obsłużyć ruchu na serwerze.
-Wdrożenie spowoduje przerwę techniczną.
+Wdrożenie na maszynę z większą ilością zasobów spowoduje przerwę techniczną.
 
 #### Rozwiązanie
 
@@ -40,9 +40,10 @@ Użycie load balancera.
 
 <img src="img/3.webp" alt=""/>
 
-Pozwoli nam on wyskalować aplikację horyzontalnie (czyli zwiększając ilość serwerów zamiast wymiany serwera na
-mocniejszy).
-Umożliwi nam wdrożenie typu blue-green (znane również jako zero-downtime deployment).
+- Pozwoli nam on wyskalować aplikację horyzontalnie (czyli zwiększając ilość serwerów zamiast wymiany serwera na
+  mocniejszy).
+- Umożliwi nam wdrożenie typu blue-green (znane również jako zero-downtime deployment). Będziemy mogli wdrożyć nową
+  wersję aplikacji bez konieczności przerwy technicznej.
 
 ### Założenia load balancingu
 
@@ -89,7 +90,8 @@ serwer.
 
 Z tą technologią wiąże się kilka ograniczeń. Pierwsze jest związane z maksymalną długością odpowiedzi, jaką może zwrócić
 serwer DNS. Największa gwarantowana
-odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets) (niektórzy klienci obsługują większe, ale nie wszyscy). W Allegro istnieją usługi uruchomione na raz na kilkuset
+odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets) (
+niektórzy klienci obsługują większe, ale nie wszyscy). W Allegro istnieją usługi uruchomione na raz na kilkuset
 serwerach. To za dużo, aby pomieścić je w dozwolonej odpowiedzi DNS. Ta wada ogranicza nam znacznie skalowalność. Drugą
 istotną rzeczą jest dostępność. Jeśli jeden z serwerów z listy przestanie działać nie jesteśmy w stanie szybko go z niej
 wykluczyć.
