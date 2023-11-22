@@ -65,6 +65,28 @@ It should use the round-robin algorithm.
 
 ### 2
 
+Load balancer should have an endpoint for registration of the new application server.
+
+1. Implement the endpoint in load balancer:
+
+```http request
+POST http://localhost:8081/instances
+
+{
+  "url": "localhost:5003"
+}
+```
+
+2. Start a new instance in a separate terminal/process:
+
+```bash
+cd app/java && SERVER_PORT=5003 ./gradlew bootRun
+```
+
+3. Register the new instance in load balancer and test whether it receives the traffic.
+
+### 3
+
 Load balancer cannot route the traffic to unhealthy servers.
-Implement checking liveness of every instance by load balancer every 100ms.
-Unhealthy instances must not receive requests from load balancer. 
+Implement checking liveness of every instance by the load balancer every 100ms.
+Unhealthy instances must not receive requests from the load balancer.
