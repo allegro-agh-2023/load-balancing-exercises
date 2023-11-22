@@ -12,11 +12,11 @@ while True:
         conn, addr = lb_socket.accept()
         with conn:
             print(f"Connected by {addr}")
-            request_data = conn.recv(1024)
+            request_data = conn.recv(2048)
             print(f"Request: {request_data}")
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as app_socket:
                 app_socket.connect(("127.0.0.1", random.choice([5001, 5002])))
                 app_socket.sendall(request_data)
-                response_data = app_socket.recv(1024)
-                print(f"Response: {response_data}")
-                conn.sendall(response_data + b"\n")
+                response_data = app_socket.recv(2048)
+                print(f'Response: {response_data}')
+                conn.sendall(response_data)
