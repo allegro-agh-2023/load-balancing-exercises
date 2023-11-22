@@ -176,34 +176,30 @@ sequenceDiagram
     participant Load balancer
     participant App Server 1
     participant App Server 2
-    User->>DNS: What is the IP of the App?
-    DNS->>User: It's <IP of the Load balancer>
-    User->>Load balancer: Hey App! Do something for me
-    Load balancer->>App Server 1: Hey App! Do something for me
-    App Server 1->>Load balancer: Done!
-    Load balancer->>User: Done!
+    User ->> DNS: What is the IP of the App?
+    DNS ->> User: It's <IP of the Load balancer>
+    User ->> Load balancer: Hey App! Do something for me
+    Load balancer ->> App Server 1: Hey App! Do something for me
+    App Server 1 ->> Load balancer: Done!
+    Load balancer ->> User: Done!
 ```
 
 Wykorzystanie fizycznego load balancera pozwala nam całkowicie zwirtualizować nasz serwis dla użytkownika.
-Nie łączy się
-on już z konkretną instancją naszej usługi, ale z load balancerem.
-Zapytanie jest dalej przekazywane do instancji
-wybranej przez load balancer.
-Cały proces jest w pełni kontrolowany przez load balancer (wybiera on, na jaki konkretny
-serwer trafi zapytanie).
-Mając takie rozwiązanie możemy mówić już nie tylko o balansowaniu ruchu (load balancing), ale o
-jego dystrybucji (load distribution).
-Load balancer będąc świadomy, jakie serwery znajdują się w klastrze może skierować
-więcej ruchu do tych o większej mocy obliczeniowej i mniej do tych z mniejszą mocą.
+Nie łączy się on już z konkretną instancją naszej usługi, ale z load balancerem.
+Zapytanie jest dalej przekazywane do serwera aplikacji wybranego przez load balancer.
+Cały proces jest w pełni kontrolowany przez load balancer (wybiera on, na jaki konkretny serwer trafi zapytanie).
+Mając takie rozwiązanie możemy mówić już nie tylko o balansowaniu ruchu (load balancing), ale o jego dystrybucji (load
+distribution).
+Load balancer będąc świadomy, jakie serwery znajdują się w klastrze może skierować więcej ruchu do tych o większej mocy
+obliczeniowej i mniej do tych z mniejszą mocą.
 
 #### Load balancing HTTP
 
 Popularnym modelem działania Load balancera jest load balancing ruchu HTTP.
-W tym przypadku do load balancera trafia
-całe zapytanie.
-Load balancer ma dostęp do metody, ścieżki, nagłówków oraz zawartości zapytania http, jak również
-zwracanej odpowiedzi.
+W tym przypadku do load balancera trafia całe zapytanie i jest ono czytane przez load balancer.
+Load balancer ma dostęp do metody, ścieżki, nagłówków oraz zawartości zapytania http, jak również zwracanej odpowiedzi.
 Na podstawie parametrów zapytania mogą podjąć decyzję, do jakiego serwera skierować dane zapytanie.
+Przykładową implementację takiego load balancera możesz znaleźć [w tym projekcie](../tasks_http/loadbalancer).
 
 ##### Mikroserwisy i load balancing po stronie klienta
 
@@ -211,8 +207,7 @@ W architekturze mikroserwisowej, gdy robimy zapytanie do innego serwisu (który 
 zaimplementować load balancing po stronie klienta HTTP.
 Istnieją do tego gotowe rozwiązania (na przykład Spring Cloud
 LoadBalancer: https://spring.io/guides/gs/spring-cloud-loadbalancer/).
-Aby zastosować to rozwiązanie potrzebujemy znać
-również adresy instancji serwisu, z którym chcemy się połączyć.
+Aby zastosować to rozwiązanie potrzebujemy znać również adresy instancji serwisu, z którym chcemy się połączyć.
 Ten problem możemy rozwiązać za pomocą Service Discovery.
 
 ### Algorytmy wykorzystywane do load balancingu
