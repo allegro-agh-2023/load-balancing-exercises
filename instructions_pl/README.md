@@ -199,7 +199,7 @@ Popularnym modelem działania Load balancera jest load balancing ruchu HTTP.
 W tym przypadku do load balancera trafia całe zapytanie i jest ono czytane przez load balancer.
 Load balancer ma dostęp do metody, ścieżki, nagłówków oraz zawartości zapytania http, jak również zwracanej odpowiedzi.
 Na podstawie parametrów zapytania mogą podjąć decyzję, do jakiego serwera skierować dane zapytanie.
-Przykładową implementację load balancera HTTP możesz znaleźć [w tym projekcie](../tasks_http/loadbalancer).
+Przykładową implementację load balancera HTTP możesz znaleźć [w tym projekcie](../tasks/loadbalancer).
 
 ##### Mikroserwisy i load balancing po stronie klienta
 
@@ -258,8 +258,8 @@ Należy jednak pamiętać, że taki algorytm może przeszkodzić nam w równomie
 
 ### [Zadanie] Load balancing HTTP
 
-Zadania są dostępne w [folderze tasks_http](../tasks_http).
-Ich treść znajdziesz w pliku [README.md](../tasks_http/README.md)
+Zadania są dostępne w [folderze tasks_http](../tasks).
+Ich treść znajdziesz w pliku [README.md](../tasks/README.md)
 
 ### Warstwy sieciowe, a load balancing
 
