@@ -221,20 +221,23 @@ Prosty algorytm polegający na przekazywaniu każdego kolejnego zapytania do nas
 ##### Weighted round-robin
 
 Modyfikacja round robin polegająca na przekazywaniu do każdego serwera ilości zapytań proporcjonalnej do jego wagi.
+Może się przydać, gdy serwery mają różne ilości dostępnych zasobów.
 
 ##### IP hash
 
-Wylicza hash z adresu IP i na jego podstawie wybiera odpowiedni serwer. Gdy serwery obsługujące ruch się nie zmieniają
-to algorytm ten gwarantuje obsługę zapytań od ego samego użytkownika przez ten sam serwer.
+Wylicza hash z adresu IP i na jego podstawie wybiera odpowiedni serwer.
+Algorytm ten gwarantuje obsługę zapytań od tego samego użytkownika przez ten sam serwer, dopóki jest on dostępny.
 
 #### Dynamiczne
 
 ##### Least connection
 
 Wybieramy serwer, który ma najmniej otwartych połączeń.
-Weighted least connection
-Jak wyżej, ale zakładamy, że niektóre serwery są w stanie obsłużyć więcej połączeń niż inne. Dlatego przypisujemy im
-wagi.
+
+##### Weighted least connection
+
+Jak wyżej, ale zakładamy, że niektóre serwery są w stanie obsłużyć więcej połączeń niż inne.
+Dlatego przypisujemy im wagi.
 
 ##### Weighted response time
 
@@ -244,16 +247,14 @@ obsłuży zapytanie użytkownika.
 ##### Resource based
 
 Wymaga monitorowania zasobów dostępnych w danej chwili na serwerze (zużycie CPU i pamięci).
-Na tej podstawie wybieramy
-najmniej obciążony serwer.
+Na tej podstawie wybieramy najmniej obciążony serwer.
 
 #### Sticky Session
 
-Kiedy chcemy, aby sesja danego użytkownika była przekierowana zawsze do tego samego serwera możemy skorzystać z tak
-zwanego „sticky session”.
-Jest on możliwy do zaimplementowania w load balancerach HTTP, ponieważ za każdym zapytaniem
-odczytujemy nagłówki zapytania. Możemy dzięki temu dodawać ciasteczka (cookies), za pomocą których oznaczymy sesję
-użytkownika.
+Kiedy chcemy, aby sesja danego użytkownika była przekierowana zawsze do tego samego serwera możemy skorzystać z tak zwanego „sticky session”.
+Jest on możliwy do zaimplementowania w load balancerach HTTP, ponieważ za każdym zapytaniem odczytujemy nagłówki zapytania.
+Możemy dzięki temu dodawać ciasteczka (cookies), za pomocą których oznaczymy sesję użytkownika. 
+Należy jednak pamiętać, że taki algorytm może przeszkodzić nam w równomiernej dystrybucji ruchu. 
 
 ### [Zadanie] Load balancing HTTP
 
