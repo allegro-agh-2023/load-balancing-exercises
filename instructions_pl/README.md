@@ -8,11 +8,11 @@ Daj nam feedback i pomóż nam ulepszyć zajęcia, uzupełniając tę ankietę: 
 
 1. Wprowadzenie do load balancingu
 2. Load balancing DNS
-3. [Zadanie] DNS resolving
+3. **[Zadanie]** DNS resolving
 4. Load balancing jako urządzenie fizyczne
-5. [Zadanie] Load Balancer HTTP
+5. **[Zadanie]** Load Balancer HTTP
 6. Load balancing na różnych warstwach ISO/OSI
-7. [Zadanie] Load balancer warstwy 4
+7. **[Zadanie]** Load balancer warstwy 4
 
 ## Wiedza
 
