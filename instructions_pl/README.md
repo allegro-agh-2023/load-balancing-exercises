@@ -89,8 +89,7 @@ serwer.
 
 Z tą technologią wiąże się kilka ograniczeń. Pierwsze jest związane z maksymalną długością odpowiedzi, jaką może zwrócić
 serwer DNS. Największa gwarantowana
-odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets) (
-niektórzy klienci obsługują większe, ale nie wszyscy). W Allegro istnieją usługi uruchomione na raz na kilkuset
+odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets) (niektórzy klienci obsługują większe, ale nie wszyscy). W Allegro istnieją usługi uruchomione na raz na kilkuset
 serwerach. To za dużo, aby pomieścić je w dozwolonej odpowiedzi DNS. Ta wada ogranicza nam znacznie skalowalność. Drugą
 istotną rzeczą jest dostępność. Jeśli jeden z serwerów z listy przestanie działać nie jesteśmy w stanie szybko go z niej
 wykluczyć.
@@ -130,7 +129,7 @@ W odpowiedzi zwróćmy uwagę na:
 - TTL, czyli czas, przez jaki jeszcze ten adres będzie ważny (przez tyle sekund możemy go zapamiętać i nie pytać o
   niego).
 - Serwer DNS, który zwrócił nam odpowiedź. W tym przypadku jest to adres sieci lokalnej (172.20.\*.\*), a więc zwrócony
-  wpis był zapamiętany/zacacheowany przez lokalny DNS resolver
+  wpis był zapamiętany/cacheowany przez lokalny DNS resolver
 
 Możemy zapytać o rekordy typu NS-czyli o to, jakie serwery odpowiadają za propagowanie domeny google.com.
 
@@ -158,7 +157,7 @@ pomocą DNS.
 
 - Jakie są rekordy NS dla danego serwisu?
 - Jaki jest maksymalny TTL dla wpisu z adresem IP?
-- Czy serwis wykorzystuje loadbalancing DNS?
+- Czy serwis wykorzystuje load balancing DNS?
 
 **[Dodatkowy materiał]** Jak działa DNS możesz dowiedzieć się w tym komiksie: https://howdns.works/
 
@@ -247,7 +246,7 @@ użytkownika.
 Zadania są dostępne w [folderze tasks_http](../tasks_http).
 Ich treść znajdziesz w pliku [README.md](../tasks_http/README.md)
 
-### Warstwy sieciowe, a loadbalancing
+### Warstwy sieciowe, a load balancing
 
 Implementując loadbalancer istotne jest, aby zdecydować, na jakiej warstwie sieciowej powinien on działać.
 Rozróżniamy dwa typy load balancerów w zależności od tego, w jakim modelu sieciowym działają.
