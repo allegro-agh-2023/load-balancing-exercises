@@ -83,46 +83,40 @@ Przydaje się to w określonych sytuacjach:
 
 ### Load balancing z użyciem DNS
 
-Pierwszym rozwiązaniem używanym do podstawowego load balancingu było użycie protokołu DNS.
-Pozwala on na zwracanie listy
-adresów, gdy pytamy o domenę.
+Historycznie, pierwszym rozwiązaniem używanym do podstawowego load balancingu było użycie protokołu DNS.
+Używamy go podczas odpytywania się o nazwę domeny (np. allegro.cz).
+Serwer DNS w odpowiedzi zwraca adres IP pod którym znajduje się serwer obsługujący daną domenę.
 Gdy dostajemy taką listę, zazwyczaj wykorzystuje się pierwszy adres do połączenia.
-DNS
-zwracając listę adresów w odpowiedzi na kolejne zapytanie wykorzystuje algorytm round-robin.
-Pierwszy adres z listy
-zwracany jest na ostatniej pozycji.
-Dzięki temu kolejna osoba, która odpytuje się DNS, prawdopodobnie wykorzysta inny
-serwer.
+DNS, zwracając listę adresów w odpowiedzi na kolejne zapytanie, wykorzystuje algorytm round-robin.
+Dzięki temu kolejna osoba, która odpytuje się DNS, prawdopodobnie wykorzysta inny serwer.
 
 <img src="img/7.webp" alt=""/>
 
 Z tą technologią wiąże się kilka ograniczeń. Pierwsze jest związane z maksymalną długością odpowiedzi, jaką może zwrócić
 serwer DNS. Największa gwarantowana
-odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets) (
-niektórzy klienci obsługują większe, ale nie wszyscy). W Allegro istnieją usługi uruchomione na raz na kilkuset
-serwerach. To za dużo, aby pomieścić je w dozwolonej odpowiedzi DNS. Ta wada ogranicza nam znacznie skalowalność. Drugą
-istotną rzeczą jest dostępność. Jeśli jeden z serwerów z listy przestanie działać nie jesteśmy w stanie szybko go z niej
-wykluczyć.
+odpowiedź [wynosi 512 bajtów](https://labs.apnic.net/index.php/2020/10/31/dns-xl/#:~:text=The%20DNS%20operates%20in%20a,DNS%20response%20was%20512%20octets).
+Niektóre serwery są w stanie zwrócić dłuższą odpowiedź, ale nie jest to standardem.
+W Allegro istnieją usługi uruchomione na raz na kilkuset serwerach. To za dużo, aby pomieścić je w dozwolonej odpowiedzi
+DNS. Ta wada ogranicza nam znacznie skalowalność. Drugą istotną rzeczą jest dostępność. Jeśli jeden z serwerów z listy
+przestanie działać nie jesteśmy w stanie szybko go z niej wykluczyć.
 
 <img src="img/8.webp" alt=""/>
 
 Serwowanie listy adresów nie jest jedynym rozwiązaniem. Posiadając własny serwer DNS (zwany nameserver, NS lub
 Authoritative DNS) możemy serwować za każdym razem inny adres IP. Możemy dzięki temu przekierować użytkownika do
 konkretnego serwera oraz przed udostępnieniem adresu upewnić się, że serwer zlokalizowany pod nim działa poprawnie.
-Tutaj niestety przeszkodzi nam mechanizm cache’owania odpowiedzi DNS. Jednakowo przeglądarka, system operacyjny oraz
+Tutaj niestety przeszkodzi nam mechanizm cacheowania odpowiedzi DNS. Jednakowo przeglądarka, system operacyjny oraz
 wszystkie serwery DNS po drodze mogą na jakiś czas zapamiętać serwowany adres. Przez to nie mamy całkowitej kontroli nad
 tym, do jakiego serwera trafi użytkownik i czy będzie on dostępny.
 
 <img src="img/9.webp" alt=""/>
 
 Wykorzystując algorytmy DNS doświadczymy również problemu z utrzymaniem przewidywalności.
-Przez algorytm round robin nie
-jesteśmy w stanie kontrolować, jaka ilość ruchu trafia do konkretnego serwera.
-Dodatkowo mechanizmy cache’owania mogą
-sprawić, że ruch ten będzie nierównomierny.
-To sprawia, że będziemy mieli problemy z przeciążonymi serwerami (w
-momencie, gdy serwer jest maksymalnie obciążony nadal będą do niego kierowane kolejne zapytania) lub zasoby będą
-nieefektywnie wykorzystane (zawsze będziemy musieli mieć zapas mocy obliczeniowej na każdym z serwerów).
+Przez algorytm round robin nie jesteśmy w stanie kontrolować, jaka ilość ruchu trafia do konkretnego serwera.
+Dodatkowo mechanizmy cache’owania mogą sprawić, że ruch ten będzie nierównomierny.
+To sprawia, że będziemy mieli problemy z przeciążonymi serwerami (w momencie, gdy serwer jest maksymalnie obciążony
+nadal będą do niego kierowane kolejne zapytania) lub zasoby będą nieefektywnie wykorzystane (zawsze będziemy musieli
+mieć zapas mocy obliczeniowej na każdym z serwerów).
 
 ### [Zadanie] DNS
 
@@ -150,10 +144,12 @@ bezpośrednio jednego z tych serwerów o wpis.
 
 <img src="img/12.webp" alt=""/>
 
-Dostaliśmy adres z TTL równym 300 sekund-czyli 5 minut. Przez tyle ten adres może być zapamiętany. Po tym czasie
-pośrednie serwery DNS muszą się ponownie odpytać jednego z serwerów NS o adres. Zauważ, że podczas pierwszego zapytania
-dostaliśmy TTL równy 196. To oznacza, że ten adres będzie zapamiętany na lokalnym DNS jeszcze przez 196 sekund (czyli
-był prawdopodobnie pobrany z serwera NS 104 sekundy wcześniej).
+Dostaliśmy adres z TTL równym 300 sekund, czyli 5 minut.
+Przez tyle ten adres może być zapamiętany.
+Po tym czasie pośrednie serwery DNS muszą się ponownie odpytać jednego z serwerów NS o adres.
+Zauważ, że podczas pierwszego zapytania dostaliśmy TTL równy 196.
+To oznacza, że ten adres będzie zapamiętany na lokalnym DNS jeszcze przez 196 sekund (czyli był prawdopodobnie pobrany z
+serwera NS 104 sekundy wcześniej).
 
 Zapytanie możemy powtórzyć kilka razy, aby sprawdzić, czy za każdym razem dostaniemy ten sam adres. Użyję parametru
 +short dla czytelności (wypisany zostanie sam adres IP).
