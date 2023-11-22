@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoadbalancerEndpoint {
 
     private final RestTemplate restTemplate;
+    private int requestsCount = 0;
 
     public LoadbalancerEndpoint(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -27,7 +28,7 @@ public class LoadbalancerEndpoint {
         String firstInstanceUrl = "http://app-instance-1:5000";
         String secondInstanceUrl = "http://app-instance-2:5000";
         /*
-        * If you do not use Docker, URLs look like these:
+        * If you do NOT use Docker, URLs look like these:
         * String firstInstanceUrl = "http://localhost:5001";
         * String secondInstanceUrl = "http://localhost:5002";
         * */
@@ -35,9 +36,13 @@ public class LoadbalancerEndpoint {
         /*
         * TODO: Start your implementation here
         *
-        * Currently, all requests are forwarded to app-instance-1. Try to implement round-robin!
-        * Every second request should be routed to app-instance-2.
-        * You can test your load balancer with benchmark on GET http://localhost:8082/benchmark
+        * Currently, all requests are forwarded to firstInstanceUrl.
+        * Try to implement round-robin!
+        * Every second request should be routed to secondInstanceUrl.
+        *
+        * If you use Docker, you can test your load balancer with benchmark on GET http://localhost:8082/benchmark
+        * If you do NOT use Docker, just send some requests.
+        * Then look into logs, whether both instances received some requests.
         *
         * */
 

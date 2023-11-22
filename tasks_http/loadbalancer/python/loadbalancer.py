@@ -47,13 +47,13 @@ def balance_load(u_path):
     first_instance_url = 'http://app-instance-1:5000'
     second_instance_url = 'http://app-instance-2:5000'
 
-    ####
     # TODO: Start your implementation here
-    #
-    # Currently, all requests are forwarded to app-instance-1. Try to implement round-robin!
-    # Every second request should be routed to app-instance-2.
-    # You can test your load balancer with benchmark on GET http://localhost:8082/benchmark
-    # ###
+    # Currently, all requests are forwarded to firstInstanceUrl.
+    # Try to implement round-robin!
+    # Every second request should be routed to secondInstanceUrl.
+    # If you use Docker, you can test your load balancer with benchmark on GET http://localhost:8082/benchmark
+    # If you do NOT use Docker, just send some requests.
+    # Then look into logs, whether both instances received some requests.
 
     proxy_response = requests.request(method=request.method,
                                       url=f'{first_instance_url}/{u_path}',
