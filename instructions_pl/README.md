@@ -296,11 +296,19 @@ ruch.
 
 ### [Zadanie] Load balancing TCP
 
+#### Jeśli masz Dockera
+
 Ustawić nginx jako loadbalancer TCP: https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/
 
 Porównać wydajność z load balancerami HTTP.
 Możesz w prostej wersji postawić dwa nginxy.
 Jeden HTTP, jeden TCP i puścić benchmark kilka razy.
+
+#### Jeśli nie masz Dockera
+
+W katalogu [loadbalancer/python_l4](../tasks/loadbalancer/python_l4) jest napisany bardzo prosty load balancer w Pythonie.
+Spróbuj napisać podobny load balancer w Java.
+Upewnij się, że będzie on w stanie obsługiwać wiele zapytań równolegle (wielowątkowość).
 
 ## Źródła
 
