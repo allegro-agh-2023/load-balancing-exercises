@@ -56,7 +56,7 @@ Try out some requests and see, whether they get to the apps:
 curl -X GET --location "http://localhost:8081/status"
 ```
 
-## Tasks
+## Tasks: HTTP Load balancing
 
 ### 1
 
