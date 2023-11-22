@@ -169,7 +169,20 @@ pomocą DNS.
 
 ### Load balancer jako urządzenie fizyczne
 
-<img src="img/14.webp" alt=""/>
+```mermaid
+sequenceDiagram
+    participant User
+    participant DNS
+    participant Load balancer
+    participant App Server 1
+    participant App Server 2
+    User->>DNS: What is the IP of the App?
+    DNS->>User: It's <IP of the Load balancer>
+    User->>Load balancer: Hey App! Do something for me
+    Load balancer->>App Server 1: Hey App! Do something for me
+    App Server 1->>Load balancer: Done!
+    Load balancer->>User: Done!
+```
 
 Wykorzystanie fizycznego load balancera pozwala nam całkowicie zwirtualizować nasz serwis dla użytkownika.
 Nie łączy się
