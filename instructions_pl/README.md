@@ -108,9 +108,9 @@ W tym przypadku adres jest jeden, a więc nie możemy potwierdzić, że serwis g
 
 **Twoim zadaniem jest wykonanie podobnego testu dla serwisów allegro.pl oraz netflix.com**
 
-Jakie są rekordy NS dla danego serwisu?
-Jaki jest maksymalny TTL dla wpisu z adresem IP?
-Czy serwis wykorzystuje loadbalancing DNS?
+- Jakie są rekordy NS dla danego serwisu?
+- Jaki jest maksymalny TTL dla wpisu z adresem IP?
+- Czy serwis wykorzystuje loadbalancing DNS?
 
 **[Dodatkowy materiał]** Jak działa DNS możesz dowiedzieć się w tym komiksie: https://howdns.works/
 
@@ -165,9 +165,8 @@ Wymaga monitorowania zasobów dostępnych w danej chwili na serwerze (zużycie C
 Kiedy chcemy, aby sesja danego użytkownika była przekierowana zawsze do tego samego serwera możemy skorzystać z tak zwanego “sticky session”. Jest on możliwy do zaimplementowania w Load balancerach HTTP, ponieważ za każdym zapytaniem odczytujemy nagłówki zapytania - możemy dzięki temu dodawać ciasteczka (cookies) za pomocą których oznaczymy sesję użytkownika.
 
 ### [Zadanie] Load balancing HTTP
-Ściągnij na swój komputer repozytorium https://github.com/mkuzmik/load-balancing-exercises
 
-Repozytorium oraz zadania są opisane w pliku README.md
+Zadania są dostępne w [folderze tasks_http](../tasks_http) ich treść znajdziesz w pliku [README.md](../tasks_http/README.md)
 
 ### Warstwy sieciowe, a loadbalancing
 
