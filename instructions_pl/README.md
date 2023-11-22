@@ -47,6 +47,10 @@ Użycie load balancera.
 
 ### Założenia load balancingu
 
+W [dokumencie opublikowanym przez firmę F5 ](https://www.f5.com/content/dam/f5/corp/global/pdf/white-papers/evolution-adc-wp.pdf)
+wymienione są trzy założenia, które muszą być spełnione przez współczesny load balancer: skalowalność, wysoka dostępność
+oraz przewidywalność.
+
 #### Skalowalność (ang. Scalability)
 
 <img src="img/4.webp" alt=""/>
@@ -55,23 +59,27 @@ Zdolność dynamicznego przystosowywania się systemu do zwiększonego ruchu bez
 Gdy mówimy o load balancingu mamy na myśli zazwyczaj skalowalności horyzontalną, która polega na dodawaniu nowych
 maszyn/serwerów do klastra obsługującego ruch.
 Z perspektywy użytkownika proces skalowania powinien być niewidoczny.
-Cały klaster powinien być traktowany jako jeden wirtualny serwer.
+Cały klaster powinien być traktowany jako jeden wirtualny serwer (reverse proxy).
 
 #### Wysoka dostępność (ang. High availability)
 
 <img src="img/5.webp" alt=""/>
 
 O wysokiej dostępności możemy mówić, gdy obsługujemy ruch poprawnie, nawet gdy część systemu ulega awarii.
-Przykładowo,
-gdy jeden z serwerów ulegnie uszkodzeniu ruch powinien być przekierowany natychmiast do pozostałych.
+Gdy jeden z serwerów ulegnie uszkodzeniu, ruch powinien być przekierowany natychmiast do pozostałych.
+Nie może to wymagać konieczności manualnej konfiguracji klastra.
 
 #### Przewidywalność (ang. Predictability)
 
 <img src="img/6.webp" alt=""/>
 
 Posiadamy kontrolę nad tym, jak i kiedy obsłużymy ruch.
-Oznacza to, że mamy całkowity wpływ na to, do którego serwera
-zostanie przekierowany użytkownik w momencie zapytania.
+Oznacza to, że mamy całkowity wpływ na to, do którego serwera zostanie przekierowany użytkownik w momencie zapytania.
+Przydaje się to w określonych sytuacjach:
+
+- jeden z serwerów ma mniej zasobów niż reszta
+- chcemy przekierować tylko niewielką część ruchu na serwer z nową wersją aplikacji (tzw. canary deployment)
+- chcemy przeprowadzić prace utrzymaniowe w jednej z serwerowni i potrzebujemy powoli przekierować ruch do pozostałych
 
 ### Load balancing z użyciem DNS
 
